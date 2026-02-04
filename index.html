@@ -6,9 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+    --primary:#8b5cf6;
+    --accent:#a78bfa;
+    --light:#ede9fe;
+}
+
 body{
     margin:0;
-    font-family:'Arial',sans-serif;
+    font-family:Arial,sans-serif;
     background:#fff;
     text-align:center;
 }
@@ -16,15 +22,15 @@ body{
 .page{
     display:none;
     min-height:100vh;
-    padding:40px 20px 100px;
+    padding:40px 20px 120px;
     box-sizing:border-box;
 }
 
 .page.active{display:block;}
 
 h1 div{margin-bottom:8px;}
-h2{margin-bottom:10px;}
-p{margin:8px 0;}
+h2{margin-bottom:12px;}
+p{margin:10px 0;}
 
 .gif{
     max-width:260px;
@@ -33,7 +39,7 @@ p{margin:8px 0;}
 
 .buttons{
     position:fixed;
-    bottom:30px;
+    bottom:25px;
     left:50%;
     transform:translateX(-50%);
     display:flex;
@@ -46,21 +52,21 @@ p{margin:8px 0;}
 }
 
 button{
-    padding:12px 20px;
+    padding:12px 22px;
     border:none;
     border-radius:25px;
-    background:#ff7aa2;
+    background:var(--primary);
     color:#fff;
     font-size:16px;
     cursor:pointer;
 }
 
 button.secondary{
-    background:#ddd;
+    background:#e5e7eb;
     color:#333;
 }
 
-/* Gift icons */
+/* Page 3 gifts */
 .gifts{
     display:flex;
     justify-content:center;
@@ -73,33 +79,34 @@ button.secondary{
     cursor:pointer;
 }
 
+/* Subtext */
+.subtext{
+    margin-top:30px;
+    font-size:14px;
+    color:#666;
+}
+
 /* Gift 2 coupons */
 .coupon-wrapper{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
+    gap:12px;
     margin:30px 0;
 }
 
 .arrow{
     font-size:30px;
     cursor:pointer;
+    color:var(--primary);
 }
 
 .coupon{
     width:260px;
-    padding:20px;
-    border:2px dashed #ff7aa2;
-    border-radius:15px;
-}
-
-.subtext{
-    position:fixed;
-    bottom:80px;
-    width:100%;
-    font-size:14px;
-    color:#777;
+    padding:18px;
+    border:2px dashed var(--accent);
+    border-radius:16px;
+    background:var(--light);
 }
 </style>
 </head>
@@ -147,13 +154,14 @@ button.secondary{
     <img src="assets/gif3.gif" class="gif">
 
     <div class="buttons">
-        <button onclick="go('page1b_final')">Maybe later</button>
+        <button onclick="go('page1b_star')">Maybe later</button>
         <button onclick="go('page1')">Try again</button>
     </div>
 </div>
 
-<div class="page" id="page1b_final">
+<div class="page" id="page1b_star">
     <h1>Okay, see you later 😊</h1>
+    <img src="assets/gif4.gif" class="gif">
 </div>
 
 <!-- PAGE 2 -->
@@ -163,7 +171,7 @@ button.secondary{
         <div>just for today? 🌷</div>
     </h1>
 
-    <img src="assets/gif4.gif" class="gif">
+    <img src="assets/gif5.gif" class="gif">
 
     <div class="buttons space">
         <button onclick="go('page3')">Yes</button>
@@ -178,7 +186,7 @@ button.secondary{
         <div>Take your time</div>
     </h1>
 
-    <img src="assets/gif5.gif" class="gif">
+    <img src="assets/gif6.gif" class="gif">
 
     <p>If you ever feel like coming back, I’ll be here.</p>
 
@@ -221,12 +229,10 @@ button.secondary{
 
     <div class="coupon-wrapper">
         <div class="arrow" onclick="prevCoupon()">◀</div>
-
         <div class="coupon">
             <h3 id="couponTitle"></h3>
             <p id="couponDesc"></p>
         </div>
-
         <div class="arrow" onclick="nextCoupon()">▶</div>
     </div>
 
@@ -241,14 +247,27 @@ button.secondary{
 <div class="page" id="gift3">
     <h2>Fun Challenge Time! 🎲</h2>
 
-    <p><b>Can you guess which is my favourite anime?</b></p>
+    <div id="challenge1">
+        <p><b>Can you guess which is my favourite anime?</b></p>
+        <button onclick="answer(true)">One Piece</button><br><br>
+        <button onclick="answer(false)">Bleach</button><br><br>
+        <button onclick="answer(false)">Demon Slayer</button><br><br>
+        <button onclick="answer(false)">Zenshu</button>
+    </div>
 
-    <button onclick="answer(false)">Bleach</button><br><br>
-    <button onclick="answer(true)">One Piece</button><br><br>
-    <button onclick="answer(false)">Demon Slayer</button><br><br>
-    <button onclick="answer(false)">Zenshu</button>
+    <div id="challenge2" style="display:none;">
+        <p>
+            If you are reading this, here is a fun challenge for you 😊<br><br>
+            For one week let’s do this —<br>
+            You will randomly write a Bhojpuri word,<br>
+            and I’ll guess the meaning,<br>
+            and I will write a Russian word.<br><br>
+            <b>Example:</b><br>
+            Kya tum библиотека me ho?
+        </p>
+    </div>
 
-    <div class="buttons" style="display:none" id="gift3Back">
+    <div class="buttons" id="gift3Back" style="display:none;">
         <button onclick="closeGift(3)">Back</button>
     </div>
 </div>
@@ -260,7 +279,7 @@ button.secondary{
         <div>I hope you enjoyed your time here</div>
     </h1>
 
-    <img src="assets/gif6.gif" class="gif">
+    <img src="assets/gif7.gif" class="gif">
 </div>
 
 <script>
@@ -271,9 +290,7 @@ function go(id){
     document.getElementById(id).classList.add('active');
 }
 
-function openGift(n){
-    go('gift'+n);
-}
+function openGift(n){ go('gift'+n); }
 
 function closeGift(n){
     opened[n-1]=true;
@@ -290,21 +307,21 @@ const coupons=[
     ["A random surprise from me","Something unexpected, just because."]
 ];
 let c=0;
-
 function showCoupon(){
     couponTitle.innerText=coupons[c][0];
     couponDesc.innerText=coupons[c][1];
 }
-function nextCoupon(){c=(c+1)%coupons.length;showCoupon();}
-function prevCoupon(){c=(c-1+coupons.length)%coupons.length;showCoupon();}
+function nextCoupon(){ c=(c+1)%coupons.length; showCoupon(); }
+function prevCoupon(){ c=(c-1+coupons.length)%coupons.length; showCoupon(); }
 showCoupon();
 
-/* Gift 3 */
-function answer(correct){
-    alert(correct?"Yay! You actually know it 😄":"It's okay 😅 maybe sometime else");
-    document.getElementById('gift3Back').style.display='block';
+/* Gift 3 logic */
+function answer(){
+    document.getElementById('challenge1').style.display='none';
+    document.getElementById('challenge2').style.display='block';
+    document.getElementById('gift3Back').style.display='flex';
 }
 </script>
 
 </body>
-      </html>
+</html>
