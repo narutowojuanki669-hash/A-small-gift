@@ -2,295 +2,309 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Small Gift</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-  body { margin:0; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#fff; display:flex; flex-direction:column; min-height:100vh; justify-content:space-between; align-items:center; text-align:center; }
-  .page { display:none; flex-direction:column; align-items:center; justify-content:center; flex:1; padding:20px; width:100%; position:relative; }
-  .page.active { display:flex; }
-  h1,h2,p { margin:10px 0; }
-  h1 div { line-height:1.4em; }
-  img { max-width:300px; margin:20px 0; }
-  .button-container { position:absolute; bottom:30px; left:0; width:100%; display:flex; justify-content:center; padding:0 20px; box-sizing:border-box; }
-  .button-container.two-buttons { justify-content:space-between; }
-  .button-container button { padding:12px 25px; font-size:16px; border-radius:12px; border:none; cursor:pointer; background:#c28fff; color:#fff; margin:0 5px; transition:0.3s; }
-  .button-container button:hover { background:#a16de0; }
+body{
+    margin:0;
+    font-family:'Arial',sans-serif;
+    background:#fff;
+    text-align:center;
+}
 
-  /* Gift 2 coupon styling */
-  .coupon-card {
-    background: #d9b3ff; /* pastel purple */
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    padding: 20px;
-    margin: 15px auto;
-    width: 80%;
-    max-width: 350px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-  }
+.page{
+    display:none;
+    min-height:100vh;
+    padding:40px 20px 100px;
+    box-sizing:border-box;
+}
 
-  .coupon-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
-  }
+.page.active{display:block;}
 
-  .coupon-card h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #4b0082; /* darker purple for main text */
-  }
+h1 div{margin-bottom:8px;}
+h2{margin-bottom:10px;}
+p{margin:8px 0;}
 
-  .coupon-card p {
-    font-size: 16px;
-    color: #333;
-    line-height: 1.4em;
-  }
+.gif{
+    max-width:260px;
+    margin:20px auto;
+}
+
+.buttons{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:20px;
+}
+
+.buttons.space{
+    width:90%;
+    justify-content:space-between;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    background:#ff7aa2;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button.secondary{
+    background:#ddd;
+    color:#333;
+}
+
+/* Gift icons */
+.gifts{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin:40px 0;
+}
+
+.gift{
+    font-size:40px;
+    cursor:pointer;
+}
+
+/* Gift 2 coupons */
+.coupon-wrapper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin:30px 0;
+}
+
+.arrow{
+    font-size:30px;
+    cursor:pointer;
+}
+
+.coupon{
+    width:260px;
+    padding:20px;
+    border:2px dashed #ff7aa2;
+    border-radius:15px;
+}
+
+.subtext{
+    position:fixed;
+    bottom:80px;
+    width:100%;
+    font-size:14px;
+    color:#777;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Page 1 -->
+<!-- PAGE 1 -->
 <div class="page active" id="page1">
-  <h1>
-    <div>Welcome Shivani 🌼</div>
-    <div>I made something for you</div>
-  </h1>
-  <p>Wanna see it?</p>
-  <img src="assets/gif1.gif" alt="Main Page GIF">
-  <div class="button-container two-buttons">
-    <button id="yes1">Yes sure 😊</button>
-    <button id="maybe1">Maybe later</button>
-  </div>
+    <h1>
+        <div>Welcome Shivani 🌼</div>
+        <div>I made something for you</div>
+    </h1>
+
+    <p>Wanna see it?</p>
+
+    <img src="assets/gif1.gif" class="gif">
+
+    <div class="buttons space">
+        <button onclick="go('page1a')">Yes sure 😊</button>
+        <button class="secondary" onclick="go('page1b')">Maybe later</button>
+    </div>
 </div>
 
-<!-- Page 1a -->
+<!-- PAGE 1A -->
 <div class="page" id="page1a">
-  <h1>
-    <div>Hehe 😊</div>
-    <div>Glad to see you here!</div>
-  </h1>
-  <img src="assets/gif2.gif" alt="Hehe GIF">
-  <div class="button-container">
-    <button id="letsgopage1a">Let's go</button>
-  </div>
+    <h1>
+        <div>Hehe 😊</div>
+        <div>Glad to see you here</div>
+    </h1>
+
+    <img src="assets/gif2.gif" class="gif">
+
+    <div class="buttons">
+        <button onclick="go('page2')">Let’s go</button>
+    </div>
 </div>
 
-<!-- Page 1b -->
+<!-- PAGE 1B -->
 <div class="page" id="page1b">
-  <h1>
-    <div>That’s okay 😊</div>
-    <div>You can always come back if you want.</div>
-  </h1>
-  <img src="assets/gif3.gif" alt="Maybe Later GIF">
-  <div class="button-container two-buttons">
-    <button id="maybeLaterBtn">Maybe later</button>
-    <button id="tryAgainBtn">Try again</button>
-  </div>
+    <h1>
+        <div>That’s okay 😊</div>
+        <div>You can always come back if you want</div>
+    </h1>
+
+    <img src="assets/gif3.gif" class="gif">
+
+    <div class="buttons">
+        <button onclick="go('page1b_final')">Maybe later</button>
+        <button onclick="go('page1')">Try again</button>
+    </div>
 </div>
 
-<!-- Page 1b* -->
-<div class="page" id="page1bStar">
-  <h1><div>Okay see you later 😊</div></h1>
-  <img src="assets/gif4.gif" alt="Bye GIF">
+<div class="page" id="page1b_final">
+    <h1>Okay, see you later 😊</h1>
 </div>
 
-<!-- Page 2 -->
+<!-- PAGE 2 -->
 <div class="page" id="page2">
-  <h1>
-    <div>Can I call you my Valentine…</div>
-    <div>just for today? 🌷</div>
-  </h1>
-  <img src="assets/gif5.gif" alt="Valentine GIF">
-  <div class="button-container two-buttons">
-    <button id="yes2">Yes</button>
-    <button id="notReady2">Not ready</button>
-  </div>
+    <h1>
+        <div>Can I call you my Valentine…</div>
+        <div>just for today? 🌷</div>
+    </h1>
+
+    <img src="assets/gif4.gif" class="gif">
+
+    <div class="buttons space">
+        <button onclick="go('page3')">Yes</button>
+        <button class="secondary" onclick="go('page2b')">Not ready</button>
+    </div>
 </div>
 
-<!-- Page 2b -->
+<!-- PAGE 2B -->
 <div class="page" id="page2b">
-  <h1>
-    <div>That's okay 😊</div>
-    <div>Take your time</div>
-  </h1>
-  <img src="assets/gif6.gif" alt="Shy GIF">
-  <p>If you ever feel like coming back, I will be here.</p>
-  <div class="button-container">
-    <button id="tryAgain2">Try again</button>
-  </div>
+    <h1>
+        <div>That’s okay 😊</div>
+        <div>Take your time</div>
+    </h1>
+
+    <img src="assets/gif5.gif" class="gif">
+
+    <p>If you ever feel like coming back, I’ll be here.</p>
+
+    <div class="buttons">
+        <button onclick="go('page2')">Try again</button>
+    </div>
 </div>
 
-<!-- Page 3 -->
+<!-- PAGE 3 -->
 <div class="page" id="page3">
-  <h1>GIFT FOR YOU 🎁</h1>
-  <p>Click any gift to open</p>
-  <div class="button-container">
-    <button id="gift1Btn">Gift 1</button>
-    <button id="gift2Btn">Gift 2</button>
-    <button id="gift3Btn">Gift 3</button>
-  </div>
+    <h1>A gift for you 🎁</h1>
 
-  <div id="giftContent"></div>
-  <div class="button-container" id="giftBackBtnContainer" style="display:none;">
-    <button id="giftBackBtn">Back</button>
-  </div>
+    <div class="gifts">
+        <div class="gift" onclick="openGift(1)">💌</div>
+        <div class="gift" onclick="openGift(2)">🎟️</div>
+        <div class="gift" onclick="openGift(3)">🎲</div>
+    </div>
+
+    <div class="subtext">Click any gift to open</div>
 </div>
 
-<!-- Page 4 -->
+<!-- GIFT 1 -->
+<div class="page" id="gift1">
+    <h2>You are really special to me.</h2>
+    <p>
+        I may not always say things perfectly, but I genuinely enjoy talking to you,
+        laughing with you, and sharing little moments like this.<br><br>
+        I hope we get to create many more memories, conversations,
+        and smiles together — at our own pace. 🌼
+    </p>
+
+    <div class="buttons">
+        <button onclick="closeGift(1)">Back</button>
+    </div>
+</div>
+
+<!-- GIFT 2 -->
+<div class="page" id="gift2">
+    <h2>A comfort coupon</h2>
+
+    <div class="coupon-wrapper">
+        <div class="arrow" onclick="prevCoupon()">◀</div>
+
+        <div class="coupon">
+            <h3 id="couponTitle"></h3>
+            <p id="couponDesc"></p>
+        </div>
+
+        <div class="arrow" onclick="nextCoupon()">▶</div>
+    </div>
+
+    <div class="subtext">Only valid if you feel like using it</div>
+
+    <div class="buttons">
+        <button onclick="closeGift(2)">Back</button>
+    </div>
+</div>
+
+<!-- GIFT 3 -->
+<div class="page" id="gift3">
+    <h2>Fun Challenge Time! 🎲</h2>
+
+    <p><b>Can you guess which is my favourite anime?</b></p>
+
+    <button onclick="answer(false)">Bleach</button><br><br>
+    <button onclick="answer(true)">One Piece</button><br><br>
+    <button onclick="answer(false)">Demon Slayer</button><br><br>
+    <button onclick="answer(false)">Zenshu</button>
+
+    <div class="buttons" style="display:none" id="gift3Back">
+        <button onclick="closeGift(3)">Back</button>
+    </div>
+</div>
+
+<!-- PAGE 4 -->
 <div class="page" id="page4">
-  <h1>
-    <div>Thank you 😊</div>
-    <div>I hope you enjoyed your time here!</div>
-  </h1>
-  <img src="assets/gif7.gif" alt="Thank You GIF">
+    <h1>
+        <div>Thank you 😊</div>
+        <div>I hope you enjoyed your time here</div>
+    </h1>
+
+    <img src="assets/gif6.gif" class="gif">
 </div>
 
 <script>
-  // --- Page navigation ---
-  function showPage(id){
+let opened=[false,false,false];
+
+function go(id){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-  }
+}
 
-  // --- Page 1 buttons ---
-  document.getElementById('yes1').addEventListener('click',()=>showPage('page1a'));
-  document.getElementById('maybe1').addEventListener('click',()=>showPage('page1b'));
-  document.getElementById('letsgopage1a').addEventListener('click',()=>showPage('page2'));
-  document.getElementById('maybeLaterBtn').addEventListener('click',()=>showPage('page1bStar'));
-  document.getElementById('tryAgainBtn').addEventListener('click',()=>showPage('page1'));
-  document.getElementById('yes2').addEventListener('click',()=>showPage('page3'));
-  document.getElementById('notReady2').addEventListener('click',()=>showPage('page2b'));
-  document.getElementById('tryAgain2').addEventListener('click',()=>showPage('page2'));
+function openGift(n){
+    go('gift'+n);
+}
 
-  // --- Gifts tracking ---
-  let giftsViewed = { gift1:false, gift2:false, gift3:false };
-  let currentGift = null;
-  let giftIndex = 0;
+function closeGift(n){
+    opened[n-1]=true;
+    go('page3');
+    if(opened.every(v=>v)) go('page4');
+}
 
-  const gifts = {
-    gift1:["Here's a short sweet message just for you! 🌸"],
-    gift2:[
-      { title: "A Listening Ear", description: "For when you need to talk" },
-      { title: "A Playlist Recommendation", description: "Songs picked just for you" },
-      { title: "A Tea", description: "A warm cup to relax" },
-      { title: "All You Want Anime Recommendations", description: "My suggestions for you" },
-      { title: "A Random Surprise From Me", description: "A little unexpected joy" }
-    ],
-    gift3:[
-      "Fun Challenge Time! 🎲",
-      "Can you guess which is my favourite anime?"
-    ]
-  };
+/* Gift 2 coupons */
+const coupons=[
+    ["A listening ear","I’ll listen without interrupting or judging."],
+    ["A playlist recommendation","Music that matches your mood."],
+    ["A tea","A virtual tea break together ☕"],
+    ["All-you-want anime recommendations","Endless anime talks 😄"],
+    ["A random surprise from me","Something unexpected, just because."]
+];
+let c=0;
 
-  function openGift(gift){
-    currentGift=gift; giftIndex=0;
-    document.getElementById('giftBackBtnContainer').style.display='flex';
-    showGiftContent();
-  }
+function showCoupon(){
+    couponTitle.innerText=coupons[c][0];
+    couponDesc.innerText=coupons[c][1];
+}
+function nextCoupon(){c=(c+1)%coupons.length;showCoupon();}
+function prevCoupon(){c=(c-1+coupons.length)%coupons.length;showCoupon();}
+showCoupon();
 
-  function showGiftContent(){
-    const contentDiv=document.getElementById('giftContent');
-    contentDiv.innerHTML='';
-    if(currentGift==='gift1'){
-      contentDiv.innerHTML=gifts.gift1[0];
-    } else if(currentGift==='gift2'){
-      showGift2Slide();
-    } else if(currentGift==='gift3'){
-      showGift3Step1();
-    }
-  }
-
-  // --- Gift 2 ---
-  function showGift2Slide(){
-    const contentDiv=document.getElementById('giftContent');
-    contentDiv.innerHTML='';
-
-    const coupon=gifts.gift2[giftIndex];
-    const card=document.createElement('div');
-    card.classList.add('coupon-card');
-    card.innerHTML=`<h2>${coupon.title}</h2><p>${coupon.description}</p>`;
-    contentDiv.appendChild(card);
-
-    // Page subtext at bottom
-    const subtext=document.createElement('p');
-    subtext.style.marginTop='20px';
-    subtext.innerText="Only valid if you feel like using it";
-    contentDiv.appendChild(subtext);
-
-    // Arrows for scrolling
-    const arrowsDiv=document.createElement('div');
-    arrowsDiv.classList.add('button-container');
-    arrowsDiv.style.justifyContent='center';
-    arrowsDiv.style.marginTop='15px';
-
-    const left=document.createElement('button');
-    left.innerText='←';
-    left.style.marginRight='20px';
-    left.onclick=()=>{ if(giftIndex>0){ giftIndex--; showGift2Slide(); } };
-
-    const right=document.createElement('button');
-    right.innerText='→';
-    right.style.marginLeft='20px';
-    right.onclick=()=>{ if(giftIndex<gifts.gift2.length-1){ giftIndex++; showGift2Slide(); } };
-
-    arrowsDiv.appendChild(left);
-    arrowsDiv.appendChild(right);
-    contentDiv.appendChild(arrowsDiv);
-  }
-
-  // --- Gift 3 ---
-  function showGift3Step1(){
-    const contentDiv=document.getElementById('giftContent');
-    contentDiv.innerHTML=gifts.gift3[0];
-    const nextBtn=document.createElement('button'); nextBtn.innerText='Next'; nextBtn.style.marginTop='20px';
-    nextBtn.onclick=showGift3Question;
-    contentDiv.appendChild(nextBtn);
-  }
-
-  function showGift3Question(){
-    const contentDiv=document.getElementById('giftContent');
-    contentDiv.innerHTML=gifts.gift3[1];
-    const btnContainer=document.createElement('div');
-    btnContainer.classList.add('button-container','two-buttons');
-
-    const options=["Bleach","One Piece","Demon Slayer","Zenshu"];
-    options.forEach(opt=>{
-      const btn=document.createElement('button');
-      btn.innerText=opt;
-      btn.onclick=()=>{
-        if(opt==="One Piece"){
-          contentDiv.innerHTML="Yay! You actually know it 🎉";
-        } else{
-          contentDiv.innerHTML="It's okay 😅 maybe sometime else";
-        }
-        const example=document.createElement('p');
-        example.innerHTML=`If you are reading this, here is a fun challenge for you:
-          <br>For one week, in all our messages, you will randomly write a Bhojpuri word and I will guess its meaning, and I will write a Russian word.
-          <br><br>For example, I write: <i>Kya tum библиотека me ho?</i> <br>Then you have to guess its meaning.`;
-        contentDiv.appendChild(example);
-      };
-      btnContainer.appendChild(btn);
-    });
-    contentDiv.appendChild(btnContainer);
-  }
-
-  // --- Gift buttons ---
-  document.getElementById('gift1Btn').onclick=()=>openGift('gift1');
-  document.getElementById('gift2Btn').onclick=()=>openGift('gift2');
-  document.getElementById('gift3Btn').onclick=()=>openGift('gift3');
-
-  // --- Gift Back button ---
-  document.getElementById('giftBackBtn').onclick=()=>{
-    giftsViewed[currentGift]=true; currentGift=null; giftIndex=0;
-    if(giftsViewed.gift1 && giftsViewed.gift2 && giftsViewed.gift3){
-      showPage('page4');
-    } else {
-      showPage('page3');
-    }
-    document.getElementById('giftContent').innerHTML='';
-    document.getElementById('giftBackBtnContainer').style.display='none';
-  };
+/* Gift 3 */
+function answer(correct){
+    alert(correct?"Yay! You actually know it 😄":"It's okay 😅 maybe sometime else");
+    document.getElementById('gift3Back').style.display='block';
+}
 </script>
 
 </body>
-  </html>
+      </html>
