@@ -1,146 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivani Valentine 💜</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Small Gift</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    .page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      width: 100%;
+      position: relative;
+    }
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Dancing Script', cursive;
-  background: #fef6ff;
-  text-align: center;
-  color: #4b2c7d;
-}
+    .page.active {
+      display: flex;
+    }
 
-.page { display: none; padding: 50px 20px; min-height: 100vh; transition: opacity 0.6s ease; }
-.page.active { display: block; opacity: 1; animation: fadeIn 0.6s ease; }
-button { padding: 12px 25px; margin: 12px; border-radius: 25px; border: none; cursor: pointer; font-size: 16px; transition: transform 0.2s, background 0.2s; }
-button:hover { transform: scale(1.1); }
-button.primary { background-color: #c39ff5; color: white; }
-button.secondary { background-color: #d9b3ff; color: white; }
-.gif { width: 150px; max-width: 80%; height: auto; margin: 20px 0; }
-.gifts { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 20px 0; }
-.gift-box { width: 100px; height: 100px; background: #f6e6fb; border-radius: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0px 4px 8px rgba(0,0,0,0.1); }
-.gift-box:hover { transform: scale(1.1); box-shadow: 0px 6px 12px rgba(0,0,0,0.2); }
-.gift-text { margin-top: 20px; }
-@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-.fade-out { animation: fadeOut 0.8s ease forwards; }
-@keyframes fadeOut { from {opacity: 1;} to {opacity: 0;} }
-@media (max-width: 480px) { .gifts { flex-direction: column; gap: 15px; } .gift-box { width: 80px; height: 80px; } }
-</style>
+    h1, p {
+      margin: 10px 0;
+    }
+
+    h1 div {
+      line-height: 1.4em; /* ensures multi-line text is separated */
+    }
+
+    img {
+      max-width: 300px;
+      margin: 20px 0;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .button-container.two-buttons {
+      justify-content: space-between;
+    }
+
+    .button-container button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background-color: #c28fff; /* purple theme */
+      color: #fff;
+      margin: 0 5px;
+      transition: 0.3s;
+    }
+
+    .button-container button:hover {
+      background-color: #a16de0;
+    }
+
+  </style>
 </head>
 <body>
 
-<img src="assets/tracker.png" style="display:none;" alt="">
+  <!-- Page 1: Main Valentine Question -->
+  <div class="page active" id="page1">
+    <h1>
+      <div>Welcome Shivani 🌼</div>
+      <div>I made something for you</div>
+    </h1>
 
-<div id="main" class="page active">
-  <h1>Welcome Shivani 🌼</h1>
-  <p>I made something for you</p>
-  <img class="gif" src="assets/gif1.gif" alt="Cute GIF">
-  <button class="primary" onclick="go('page1a')">Yes, sure 😊</button>
-  <button class="secondary" onclick="go('page1b')">Maybe later</button>
-</div>
+    <p>Wanna see it?</p>
 
-<div id="page1a" class="page">
-  <p>Hehe 😊 Glad to see you here</p>
-  <img class="gif" src="assets/gif2.gif" alt="Cute GIF">
-  <button class="primary" onclick="go('page2')">Let's go</button>
-</div>
+    <img src="assets/gif1.gif" alt="Main Page GIF">
 
-<div id="page1b" class="page">
-  <p>That’s okay 😊<br>You can always come back if you want.</p>
-  <img class="gif" src="assets/gif3.gif" alt="Cute GIF">
-  <button class="primary" onclick="go('page1b_star')">Maybe later</button>
-  <button class="secondary" onclick="go('main')">Try again</button>
-</div>
-
-<div id="page1b_star" class="page">
-  <p>Okay, see you later 😊</p>
-</div>
-
-<div id="page2" class="page">
-  <h2>Can I call you my Valentine… just for today? 🌷</h2>
-  <img class="gif" src="assets/gif4.gif" alt="Cute GIF">
-  <button class="primary" onclick="go('page3')">Okay 😊</button>
-  <button class="secondary" onclick="go('page2b')">Not ready</button>
-</div>
-
-<div id="page2b" class="page">
-  <p>That’s okay 😊<br>Take your time</p>
-  <img class="gif" src="assets/gif5.gif" alt="Cute GIF">
-  <p>If you ever feel like coming back. I will be here.</p>
-  <button class="primary" onclick="go('page2')">Try again</button>
-</div>
-
-<div id="page3" class="page">
-  <h2>Your Gifts 🎁</h2>
-  <div class="gifts">
-    <div class="gift-box" onclick="openGift(1)"><img src="assets/gift1.png" alt="Gift 1" width="60"></div>
-    <div class="gift-box" onclick="openGift(2)"><img src="assets/gift2.png" alt="Gift 2" width="60"></div>
-    <div class="gift-box" onclick="openGift(3)"><img src="assets/gift3.png" alt="Gift 3" width="60"></div>
+    <div class="button-container two-buttons">
+      <button id="yes1">Yes sure 😊</button>
+      <button id="maybe1">Maybe later</button>
+    </div>
   </div>
-  <div id="gift-text" class="gift-text"></div>
-  <button id="gift3-back" class="primary" onclick="fadeToPage4()" style="display:none;">Back</button>
-</div>
 
-<div id="page4" class="page">
-  <h2>Thank you 😊</h2>
-  <p>I hope you enjoyed your time here!</p>
-  <img class="gif" src="assets/gif6.gif" alt="Cute GIF">
-</div>
+  <!-- Page 1a: Hehe page -->
+  <div class="page" id="page1a">
+    <h1>
+      <div>Hehe 😊</div>
+      <div>Glad to see you here!</div>
+    </h1>
+    <img src="assets/gif2.gif" alt="Hehe GIF">
+    <div class="button-container">
+      <button id="letsgopage1a">Let's go</button>
+    </div>
+  </div>
 
-<script>
-function go(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+  <!-- Page 1b: Maybe later page -->
+  <div class="page" id="page1b">
+    <h1>
+      <div>That’s okay 😊</div>
+      <div>You can always come back if you want.</div>
+    </h1>
+    <img src="assets/gif3.gif" alt="Maybe Later GIF">
+    <div class="button-container two-buttons">
+      <button id="maybeLaterBtn">Maybe later</button>
+      <button id="tryAgainBtn">Try again</button>
+    </div>
+  </div>
 
-function openGift(num) {
-  const box = document.getElementById('gift-text');
-  if (num === 1) { box.innerHTML = "<p>Hey Shivani 🌸<br>Just wanted to say… you make ordinary days feel special 😊</p>"; }
-  if (num === 2) { box.innerHTML = `
-      <h3>Love Coupons 💗</h3>
-      <p>• A listening ear</p>
-      <p>• A playlist recommendation</p>
-      <p>• A tea ☕</p>
-      <p>• All you want anime recommendations</p>
-    `; }
-  if (num === 3) {
-    box.innerHTML = `
-      <h3>Fun Challenge Time! 🎲</h3>
-      <p><b>Can you guess which is my favourite anime?</b></p>
-      <button onclick="answer(true)">One Piece</button>
-      <button onclick="answer(false)">Bleach</button>
-      <button onclick="answer(false)">Demon Slayer</button>
-      <button onclick="answer(false)">Zenshu</button>
-    `;
-  }
-}
+  <!-- Page 1b*: See you later page -->
+  <div class="page" id="page1bStar">
+    <h1>
+      <div>Okay see you later 😊</div>
+    </h1>
+    <img src="assets/gif4.gif" alt="Bye GIF">
+  </div>
 
-function answer(correct) {
-  const box = document.getElementById('gift-text');
-  if (correct) { box.innerHTML = "Yay! You actually know it 🥹"; }
-  else { box.innerHTML = "It's okay 😅 maybe sometime else"; }
-  setTimeout(() => {
-    box.innerHTML = `
-      <p>If you are reading this, here is a fun challenge for you</p>
-      <p>For one week let's do this 👀</p>
-      <p>In all our messages:</p>
-      <p>You write a Bhojpuri word<br>I guess the meaning<br>I write a Russian word</p>
-      <p><i>Example:</i><br>Kya tum библиотека me ho?<br>Tumhe iska meaning guess karna hai</p>
-    `;
-    document.getElementById('gift3-back').style.display = 'inline-block';
-  }, 1200);
-}
+  <!-- Page 2: Valentine Call page -->
+  <div class="page" id="page2">
+    <h1>
+      <div>Can I call you my Valentine…</div>
+      <div>just for today? 🌷</div>
+    </h1>
+    <img src="assets/gif5.gif" alt="Valentine GIF">
+    <div class="button-container two-buttons">
+      <button id="yes2">Yes</button>
+      <button id="notReady2">Not ready</button>
+    </div>
+  </div>
 
-function fadeToPage4() {
-  const p3 = document.getElementById('page3');
-  p3.classList.add('fade-out');
-  setTimeout(() => { go('page4'); }, 800);
-}
-</script>
+  <!-- Page 2b: Take your time page -->
+  <div class="page" id="page2b">
+    <h1>
+      <div>That's okay 😊</div>
+      <div>Take your time</div>
+    </h1>
+    <img src="assets/gif6.gif" alt="Shy GIF">
+    <p>If you ever feel like coming back, I will be here.</p>
+    <div class="button-container">
+      <button id="tryAgain2">Try again</button>
+    </div>
+  </div>
 
+  <!-- Page 3: Gifts Page -->
+  <div class="page" id="page3">
+    <h1>GIFT FOR YOU 🎁</h1>
+    <p>Click any gift to open</p>
+    <div class="button-container">
+      <button id="gift1Btn">Gift 1</button>
+      <button id="gift2Btn">Gift 2</button>
+      <button id="gift3Btn">Gift 3</button>
+    </div>
+  </div>
+
+  <!-- Page 4: Thank you page -->
+  <div class="page" id="page4">
+    <h1>
+      <div>Thank you 😊</div>
+      <div>I hope you enjoyed your time here!</div>
+    </h1>
+    <img src="assets/gif7.gif" alt="Thank You GIF">
+  </div>
+
+  <script>
+    // Helper function to switch pages
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Page 1 buttons
+    document.getElementById('yes1').addEventListener('click', () => showPage('page1a'));
+    document.getElementById('maybe1').addEventListener('click', () => showPage('page1b'));
+
+    // Page 1a
+    document.getElementById('letsgopage1a').addEventListener('click', () => showPage('page2'));
+
+    // Page 1b
+    document.getElementById('maybeLaterBtn').addEventListener('click', () => showPage('page1bStar'));
+    document.getElementById('tryAgainBtn').addEventListener('click', () => showPage('page1'));
+
+    // Page 2 buttons
+    document.getElementById('yes2').addEventListener('click', () => showPage('page3'));
+    document.getElementById('notReady2').addEventListener('click', () => showPage('page2b'));
+
+    // Page 2b
+    document.getElementById('tryAgain2').addEventListener('click', () => showPage('page2'));
+
+    // Page 3 gift buttons (example placeholders)
+    document.getElementById('gift1Btn').addEventListener('click', () => alert("Gift 1 opened!"));
+    document.getElementById('gift2Btn').addEventListener('click', () => alert("Gift 2 opened!"));
+    document.getElementById('gift3Btn').addEventListener('click', () => alert("Gift 3 opened!"));
+
+  </script>
 </body>
-</html>
+  </html>
