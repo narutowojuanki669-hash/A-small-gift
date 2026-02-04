@@ -66,7 +66,7 @@ button.secondary{
     color:#333;
 }
 
-/* Page 3 gifts */
+/* Gifts page */
 .gifts{
     display:flex;
     justify-content:center;
@@ -210,8 +210,10 @@ button.secondary{
 
 <!-- GIFT 1 -->
 <div class="page" id="gift1">
-    <h2>You are really special to me.</h2>
+    <h2>Here’s a little message, just for you 🌼</h2>
+
     <p>
+        <b>You are really special to me.</b><br><br>
         I may not always say things perfectly, but I genuinely enjoy talking to you,
         laughing with you, and sharing little moments like this.<br><br>
         I hope we get to create many more memories, conversations,
@@ -254,6 +256,8 @@ button.secondary{
         <button onclick="answer(false)">Demon Slayer</button><br><br>
         <button onclick="answer(false)">Zenshu</button>
     </div>
+
+    <p id="feedback" style="display:none;font-weight:bold;"></p>
 
     <div id="challenge2" style="display:none;">
         <p>
@@ -304,7 +308,7 @@ const coupons=[
     ["A playlist recommendation","Music that matches your mood."],
     ["A tea","A virtual tea break together ☕"],
     ["All-you-want anime recommendations","Endless anime talks 😄"],
-    ["A random surprise from me","Something unexpected, just because."]
+    ["A random surprise from me","Something unexpected, just because I felt like it 😊"]
 ];
 let c=0;
 function showCoupon(){
@@ -315,13 +319,22 @@ function nextCoupon(){ c=(c+1)%coupons.length; showCoupon(); }
 function prevCoupon(){ c=(c-1+coupons.length)%coupons.length; showCoupon(); }
 showCoupon();
 
-/* Gift 3 logic */
-function answer(){
+/* Gift 3 logic with 3s delay */
+function answer(correct){
     document.getElementById('challenge1').style.display='none';
-    document.getElementById('challenge2').style.display='block';
-    document.getElementById('gift3Back').style.display='flex';
+
+    const feedback=document.getElementById('feedback');
+    feedback.style.display='block';
+    feedback.innerText = correct
+        ? "Yay! You actually know it 😄"
+        : "It’s okay 😅 maybe sometime else";
+
+    setTimeout(()=>{
+        document.getElementById('challenge2').style.display='block';
+        document.getElementById('gift3Back').style.display='flex';
+    },3000);
 }
 </script>
 
 </body>
-</html>
+    </html>
