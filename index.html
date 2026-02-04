@@ -37,7 +37,7 @@
     }
 
     h1 div {
-      line-height: 1.4em; /* ensures multi-line text is separated */
+      line-height: 1.4em;
     }
 
     img {
@@ -66,7 +66,7 @@
       border-radius: 12px;
       border: none;
       cursor: pointer;
-      background-color: #c28fff; /* purple theme */
+      background-color: #c28fff;
       color: #fff;
       margin: 0 5px;
       transition: 0.3s;
@@ -76,28 +76,31 @@
       background-color: #a16de0;
     }
 
+    #giftContent {
+      margin-top: 30px;
+      font-size: 18px;
+      line-height: 1.5em;
+      min-height: 50px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Page 1: Main Valentine Question -->
+  <!-- Page 1 -->
   <div class="page active" id="page1">
     <h1>
       <div>Welcome Shivani 🌼</div>
       <div>I made something for you</div>
     </h1>
-
     <p>Wanna see it?</p>
-
     <img src="assets/gif1.gif" alt="Main Page GIF">
-
     <div class="button-container two-buttons">
       <button id="yes1">Yes sure 😊</button>
       <button id="maybe1">Maybe later</button>
     </div>
   </div>
 
-  <!-- Page 1a: Hehe page -->
+  <!-- Page 1a -->
   <div class="page" id="page1a">
     <h1>
       <div>Hehe 😊</div>
@@ -109,7 +112,7 @@
     </div>
   </div>
 
-  <!-- Page 1b: Maybe later page -->
+  <!-- Page 1b -->
   <div class="page" id="page1b">
     <h1>
       <div>That’s okay 😊</div>
@@ -122,15 +125,13 @@
     </div>
   </div>
 
-  <!-- Page 1b*: See you later page -->
+  <!-- Page 1b* -->
   <div class="page" id="page1bStar">
-    <h1>
-      <div>Okay see you later 😊</div>
-    </h1>
+    <h1><div>Okay see you later 😊</div></h1>
     <img src="assets/gif4.gif" alt="Bye GIF">
   </div>
 
-  <!-- Page 2: Valentine Call page -->
+  <!-- Page 2 -->
   <div class="page" id="page2">
     <h1>
       <div>Can I call you my Valentine…</div>
@@ -143,7 +144,7 @@
     </div>
   </div>
 
-  <!-- Page 2b: Take your time page -->
+  <!-- Page 2b -->
   <div class="page" id="page2b">
     <h1>
       <div>That's okay 😊</div>
@@ -156,7 +157,7 @@
     </div>
   </div>
 
-  <!-- Page 3: Gifts Page -->
+  <!-- Page 3 -->
   <div class="page" id="page3">
     <h1>GIFT FOR YOU 🎁</h1>
     <p>Click any gift to open</p>
@@ -165,9 +166,15 @@
       <button id="gift2Btn">Gift 2</button>
       <button id="gift3Btn">Gift 3</button>
     </div>
+
+    <div id="giftContent"></div>
+
+    <div class="button-container" id="giftBackBtnContainer" style="display:none;">
+      <button id="giftBackBtn">Back</button>
+    </div>
   </div>
 
-  <!-- Page 4: Thank you page -->
+  <!-- Page 4 -->
   <div class="page" id="page4">
     <h1>
       <div>Thank you 😊</div>
@@ -177,7 +184,7 @@
   </div>
 
   <script>
-    // Helper function to switch pages
+    // Page navigation
     function showPage(id) {
       document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
       document.getElementById(id).classList.add('active');
@@ -194,18 +201,109 @@
     document.getElementById('maybeLaterBtn').addEventListener('click', () => showPage('page1bStar'));
     document.getElementById('tryAgainBtn').addEventListener('click', () => showPage('page1'));
 
-    // Page 2 buttons
+    // Page 2
     document.getElementById('yes2').addEventListener('click', () => showPage('page3'));
     document.getElementById('notReady2').addEventListener('click', () => showPage('page2b'));
 
     // Page 2b
     document.getElementById('tryAgain2').addEventListener('click', () => showPage('page2'));
 
-    // Page 3 gift buttons (example placeholders)
-    document.getElementById('gift1Btn').addEventListener('click', () => alert("Gift 1 opened!"));
-    document.getElementById('gift2Btn').addEventListener('click', () => alert("Gift 2 opened!"));
-    document.getElementById('gift3Btn').addEventListener('click', () => alert("Gift 3 opened!"));
+    // --- Gift 3 interactive ---
+    const gifts = {
+      gift1: ["Here's a short sweet message just for you! 🌸"],
+      gift2: [
+        "A listening ear 🎧",
+        "A playlist recommendation 🎵",
+        "A tea 🍵",
+        "All you want anime recommendations 📺"
+      ]
+    };
+
+    let currentGift = null;
+    let giftStep = 0;
+
+    function openGift(gift) {
+      const contentDiv = document.getElementById('giftContent');
+      const backContainer = document.getElementById('giftBackBtnContainer');
+      contentDiv.innerHTML = '';
+      backContainer.style.display = 'none';
+      currentGift = gift;
+      giftStep = 0;
+
+      if (gift === 'gift3') {
+        // Gift 3 sequence
+        showGift3Step();
+      } else {
+        // Gift 1 or 2
+        showGiftStep();
+      }
+    }
+
+    function showGiftStep() {
+      const contentDiv = document.getElementById('giftContent');
+      const messages = gifts[currentGift];
+      contentDiv.innerHTML = messages[giftStep];
+      giftStep++;
+      if (giftStep < messages.length) {
+        setTimeout(showGiftStep, 1500);
+      } else {
+        setTimeout(() => showPage('page4'), 1500);
+      }
+    }
+
+    function showGift3Step() {
+      const contentDiv = document.getElementById('giftContent');
+      const backContainer = document.getElementById('giftBackBtnContainer');
+      contentDiv.innerHTML = "Fun Challenge Time! 🎲";
+
+      setTimeout(() => {
+        contentDiv.innerHTML = "Can you guess which is my favourite anime?";
+        const options = ["Bleach", "One Piece", "Demon Slayer", "Zenshu"];
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('button-container', 'two-buttons');
+        options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.innerText = opt;
+          btn.addEventListener('click', () => {
+            if (opt === "One Piece") {
+              contentDiv.innerHTML = "Yay! You actually know it 🎉";
+            } else {
+              contentDiv.innerHTML = "It's okay 😅 maybe sometime else";
+            }
+            setTimeout(() => {
+              contentDiv.innerHTML = `If you are reading this, here is a fun challenge for you:
+              <br>For one week, in all our messages, you will randomly write a Bhojpuri word and I will guess its meaning, and I will write a Russian word.
+              <br><br>For example, I write: <i>Kya tum библиотека me ho?</i> <br>Then you have to guess its meaning.`;
+              backContainer.style.display = 'flex';
+            }, 1500);
+          });
+          btnContainer.appendChild(btn);
+        });
+        contentDiv.appendChild(btnContainer);
+      }, 1500);
+    }
+
+    // Gift buttons
+    document.getElementById('gift1Btn').addEventListener('click', () => openGift('gift1'));
+    document.getElementById('gift2Btn').addEventListener('click', () => openGift('gift2'));
+    document.getElementById('gift3Btn').addEventListener('click', () => openGift('gift3'));
+
+    // Gift 3 Back
+    document.getElementById('giftBackBtn').addEventListener('click', () => {
+      const contentDiv = document.getElementById('giftContent');
+      const backContainer = document.getElementById('giftBackBtnContainer');
+      contentDiv.style.transition = 'opacity 0.5s';
+      contentDiv.style.opacity = 0;
+      setTimeout(() => {
+        contentDiv.innerHTML = '';
+        contentDiv.style.opacity = 1;
+        backContainer.style.display = 'none';
+        currentGift = null;
+        giftStep = 0;
+        showPage('page4');
+      }, 500);
+    });
 
   </script>
 </body>
-  </html>
+        </html>
